@@ -1,1 +1,2 @@
 # bash-tricks
+asrt
