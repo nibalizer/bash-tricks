@@ -120,7 +120,7 @@ vim () {
         line_number=$(echo $* | awk -F: '{print $(NF-1)}')
         /usr/bin/vim +${line_number} ${*%:${line_number}:}
     else
-        /usr/bin/vim $*
+        /usr/bin/vim "$@"
     fi
 }
 
