@@ -116,7 +116,7 @@ gobook() {
 # Have vim inspect command history
 vim () {
     last_command=$(history | tail -n 2 | head -n 1)
-    if [[ $last_command =~ 'git grep' ]] && [[ "$*" =~ :[0-9]+:$ ]]; then
+    if [[ $last_command =~ 'git grep --line-number' ]] && [[ "$*" =~ :[0-9]+:$ ]]; then
         line_number=$(echo $* | awk -F: '{print $(NF-1)}')
         /usr/bin/vim +${line_number} ${*%:${line_number}:}
     else
