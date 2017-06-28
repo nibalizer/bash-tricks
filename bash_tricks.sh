@@ -114,6 +114,9 @@ gobook() {
 
 
 # Have vim inspect command history
+# Requires line numbering to be turned on in your .gitconfig
+# [grep]
+# lineNumber = true
 vim () {
     last_command=$(history | tail -n 2 | head -n 1)
     if [[ $last_command =~ 'git grep' ]] && [[ "$*" =~ :[0-9]+:$ ]]; then
