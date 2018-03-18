@@ -13,6 +13,8 @@ alias souce=source
 alias v=vagrant
 alias g=git
 alias d=docker
+alias cls=clear
+alias sagi='sudo apt-get install'
 
 # Short things are better (git)
 alias gs='git show --pretty=oneline'
@@ -26,6 +28,8 @@ alias utcdate='TZ=utc date'
 
 # Just fun
 alias fucking=sudo
+alias inspire='fortune | cowsay | lolcat'
+alias cinspire='clear; fortune | cowsay | lolcat'
 
 # Stored Regular Expressions
 
@@ -51,6 +55,7 @@ alias ppv='puppet parser validate'
 # Misc
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias bsc='git add .; git commit -a -m "Bull Shit Commit"; git push origin master'
+alias tyc='git add .; git commit -a -m "Typo"; git push origin master'
 
 # Functions
 #==========
