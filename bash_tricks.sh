@@ -138,3 +138,13 @@ wodim () {
     /usr/bin/wodim -v $1
     eject -T
 }
+
+
+# Puppet development
+function bint() { bundle install --path=.bundle $1 $2 $3 $4 $5; }
+function blint() { bundle exec rake lint; }
+function bval() { bundle exec rake valdiate; }
+function brake() { bundle exec rake $1 $2 $3 $4 $5 $6 $7 $8 $9; }
+function brspec() { bundle exec rspec $1 $2 $3 $4 $5 $6 $7 $8 $9; }
+function birake(){ bint && brake $1 $2 $3 $4 $5 $6 $7 $8 $9; }
+function birspec() { bint && bundle exec rspec $1 $2 $3 $4 $5 $6 $7 $8 $9; }
