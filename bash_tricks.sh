@@ -58,11 +58,18 @@ alias bsc='git add .; git commit -a -m "Bull Shit Commit"; git push origin maste
 # Get to the top of a git tree
 cdp () {
 
-  TEMP_PWD=`pwd`
-  while ! [ -d .git ]; do
-  cd ..
-  done
-  OLDPWD=$TEMP_PWD
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        TEMP_PWD=`pwd`
+        while ! [ -d .git ]; do
+            cd ..
+        done
+        return 0
+    else
+        echo "Not a git directory"
+        return 1
+    fi
 
 }
 
