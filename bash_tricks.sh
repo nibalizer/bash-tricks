@@ -116,11 +116,18 @@ gobook() {
 # Have vim inspect command history
 # Requires line numbering to be turned on in your .gitconfig
 # git config --global grep.lineNumber true
-vim () {
-    last_command=$(history | tail -n 2 | head -n 1)
-    if [[ $last_command =~ 'git grep' ]] && [[ "$*" =~ :[0-9]+:$ ]]; then
-        line_number=$(echo $* | awk -F: '{print $(NF-1)}')
-        /usr/bin/vim +${line_number} ${*%:${line_number}:}
+vim () { 
+    last_command=$(history | tail -n 2 | head -n 1)    #The string like '1234  git grep -n foo' is not helpful alone
+    
+    remleadws="${last_command#*"  "}"    #These two lines iteratively remove the added leading process number + 2 spaces, plus a
+    remtrailtws="${remleadws%*" "}"      #trailing space from the tail, yielding a clean string once again capable of eval
+    
+    file_name="$(eval $remtws | awk -F: '{print $(NF-2)}')"      #the colon seperated result of running eval against the scrubbed string
+    line_number="$(eval $remtws | awk -F: '{print $(NF-1)}')"    #allow isolation of the file_name from the line_number values 
+    
+    if [[ $last_command =~ 'git grep' ]] && [[ $line_number =~ [0-9] ]]    #2nd test in if clause previously yielded false inaccurately 
+    then
+        /usr/bin/vim +${line_number} ${file_name}    #With file_name and line_number already defined, this command is simpler logically
     else
         /usr/bin/vim "$@"
     fi
